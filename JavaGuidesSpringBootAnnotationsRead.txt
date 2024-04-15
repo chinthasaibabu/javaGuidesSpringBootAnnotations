@@ -388,3 +388,81 @@ destruction by a container
 
 
 best use case insert records into database after shutdown we can destroy records
+
+
+
+
+
+
+
+
+Stereotype annotations
+----------------------
+those annotations are used to create Spring Beans automatically in the Application context (Spring IoC container)
+
+the main Stereotype annotation is @Component
+
+by using this annotation,Spring Provides more Stereotype meta annotations such as @Service,@Repository and @Controller
+
+@Service annotation is used to create Spring Beans at the Service Layer
+
+@Repository is used to create Spring Beans for the repositories at the DAO Layer
+
+@Controller is used to create Spring Beans at the Controller layer
+
+
+
+
+
+
+
+
+@Lazy
+-----
+by Default Spring creates all singleton beans eagerly at the startup / bootstrapping of the Application context
+
+you can load the Spring beans lazily (on-demand) using @Lazy annotation
+
+@Lazy can be used with @Configuration,@Component and @Bean annotations
+
+Eager initialization is recommended - to avoid and detect all possible errors immediately rather than at runtime
+
+
+
+
+
+
+
+
+
+
+
+@Scope
+------
+The latest version of the Spring Framework defines 6 types of scopes
+
+				singleton
+				prototype
+				request
+				session
+				application
+				websocket
+
+
+
+
+
+the last 4 request,session,application,websocket are available in a web-aware application
+
+
+
+
+we use @Scope to define the scope of a @Component class or a @Bean definition
+
+
+
+
+singleton - only one instance of the bean is created and shared across the entire application.this is Default scope
+
+prototype - a new instance of the bean is created every time it is requested
+

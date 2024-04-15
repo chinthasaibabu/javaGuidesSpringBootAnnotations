@@ -6,6 +6,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import in.javaguides.controller.MyController;
 import in.javaguides.controller.PizzaController;
+import in.javaguides.lazy.LazyLoader;
 import in.javaguides.repo.MyRepo;
 import in.javaguides.service.MyService;
 
@@ -180,20 +181,35 @@ import in.javaguides.service.MyService;
 
 
 
+//@SpringBootApplication
+//public class Application {
+//
+//	public static void main(String[] args) {
+//		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+//		MyController controller = context.getBean(MyController.class);
+//		System.out.println(controller.hello());
+//		
+//		MyService service = context.getBean(MyService.class);
+//		System.out.println(service.hello());
+//		
+//		MyRepo repo = context.getBean(MyRepo.class);
+//		System.out.println(repo.hello());
+//
+//	}
+//
+//}
+
+
+
+
+
 @SpringBootApplication
 public class Application {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
-		MyController controller = context.getBean(MyController.class);
-		System.out.println(controller.hello());
+		LazyLoader lazyLoader = context.getBean(LazyLoader.class);//to load on-demand
 		
-		MyService service = context.getBean(MyService.class);
-		System.out.println(service.hello());
-		
-		MyRepo repo = context.getBean(MyRepo.class);
-		System.out.println(repo.hello());
-
 	}
 
 }

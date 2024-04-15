@@ -6,7 +6,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import in.javaguides.controller.MyController;
 import in.javaguides.controller.PizzaController;
+import in.javaguides.lazy.LazyLoader;
 import in.javaguides.repo.MyRepo;
+import in.javaguides.scope.PrototypeBean;
+import in.javaguides.scope.SingletonBean;
 import in.javaguides.service.MyService;
 
 //@SpringBootApplication
@@ -180,20 +183,66 @@ import in.javaguides.service.MyService;
 
 
 
+//@SpringBootApplication
+//public class Application {
+//
+//	public static void main(String[] args) {
+//		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+//		MyController controller = context.getBean(MyController.class);
+//		System.out.println(controller.hello());
+//		
+//		MyService service = context.getBean(MyService.class);
+//		System.out.println(service.hello());
+//		
+//		MyRepo repo = context.getBean(MyRepo.class);
+//		System.out.println(repo.hello());
+//
+//	}
+//
+//}
+
+
+
+
+
+//@SpringBootApplication
+//public class Application {
+//
+//	public static void main(String[] args) {
+//		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
+//		LazyLoader lazyLoader = context.getBean(LazyLoader.class);//to load on-demand
+//		
+//	}
+//
+//}
+
+
+
+
 @SpringBootApplication
 public class Application {
 
 	public static void main(String[] args) {
 		ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
-		MyController controller = context.getBean(MyController.class);
-		System.out.println(controller.hello());
 		
-		MyService service = context.getBean(MyService.class);
-		System.out.println(service.hello());
+		SingletonBean singletonBean1 = context.getBean(SingletonBean.class);
+		System.out.println(singletonBean1.hashCode());
 		
-		MyRepo repo = context.getBean(MyRepo.class);
-		System.out.println(repo.hello());
-
+		SingletonBean singletonBean2 = context.getBean(SingletonBean.class);
+		System.out.println(singletonBean2.hashCode());
+		
+		SingletonBean singletonBean3 = context.getBean(SingletonBean.class);
+		System.out.println(singletonBean3.hashCode());
+		
+		PrototypeBean prototypeBean1 = context.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean1.hashCode());
+		
+		PrototypeBean prototypeBean2 = context.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean2.hashCode());
+		
+		PrototypeBean prototypeBean3 = context.getBean(PrototypeBean.class);
+		System.out.println(prototypeBean3.hashCode());
+			
 	}
 
 }
