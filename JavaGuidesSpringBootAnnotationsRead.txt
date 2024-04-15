@@ -466,3 +466,76 @@ singleton - only one instance of the bean is created and shared across the entir
 
 prototype - a new instance of the bean is created every time it is requested
 
+
+
+
+
+
+
+
+
+
+
+
+@Value
+------
+@Value annotation is used to assign Default values to variables and method arguments
+
+@Value annotation is mostly used to get value for specific property key from the properties file
+
+we can read spring environment variables as well as system variable using @Value annotation
+
+
+
+to read specific environment variables and system variables
+
+
+
+
+
+
+
+
+
+@PropertySource
+----------------
+@PropertySource annotation is used to provide properties file to Spring environment
+
+@PropertySource annotation is repeatable
+
+used with @Configuration class
+
+
+
+@PropertySources
+----------------
+@PropertySources annotation is used to provide multiple properties file to Spring environment
+
+
+
+
+
+
+
+@Controller
+-----------
+@Controller annotation to make a Java Class as a Spring MVC controller 
+
+indicates that a particular class serves the role of a controller
+
+@Controller in Spring MVC web application is a Component that handles incoming HTTP requests
+
+@Controller annotation is simply a specialization of the @Component class which allows us to auto-detect implementation
+
+classes through the classpath scanning
+
+we typically use @Controller in combination with a @RequestMapping annotation for request handling methods
+
+
+
+
+
+
+
+@RestController
+---------------

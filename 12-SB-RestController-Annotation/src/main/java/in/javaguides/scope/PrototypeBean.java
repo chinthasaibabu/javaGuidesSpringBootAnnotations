@@ -1,0 +1,14 @@
+package in.javaguides.scope;
+
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)//app constants
+public class PrototypeBean {
+
+	public PrototypeBean() {
+		System.out.println("PrototypeBean...");
+	}
+}
