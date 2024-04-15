@@ -1,2 +1,390 @@
 JavaGuidesSpringBootAnnotationsRead
 ------------------------------------
+
+25+ Spring and Spring Boot Annotations
+--------------------------------------
+@Component
+
+@Autowired
+
+@Qualifier
+
+@Primary
+
+@Bean
+
+@Controller
+
+@Service
+
+@Repository
+
+@Lazy
+
+@Scope
+
+@Value
+
+@PropertySource
+
+@PropertySources
+
+@RestController
+
+@ResponseBody
+
+@RequestMapping
+
+@RequestBody
+
+@GetMapping
+
+@PostMapping
+
+@PutMapping
+
+@DeleteMapping
+
+@PathVariable
+
+@RequestParam
+
+@SpringBootApplication
+
+@Configuration
+
+@ComponentScan
+
+@EnableAutoConfiguration
+
+
+
+
+
+
+@Component
+----------
+The @Component annotation indicates that an annotated class is a "Spring Bean / Component"
+
+The @Component annotation tells Spring COntainer to automatically create Spring Bean
+
+        XML Based Configuration
+        Annotation Based Configuration
+        Java Based Configuration
+
+@Component automatically create object for this class (no need to create object)
+
+Spring IOC COntainer is also called as Inversion Controller
+
+
+package in.javaguides.controller;
+
+import org.springframework.stereotype.Component;
+
+//@Component
+//public class PizzaController {
+//
+//	public String getPizza() {
+//		return "Hot Pizza";
+//	}
+//}
+
+
+
+//@Component("pizzaDemo")
+//public class PizzaController {
+//
+//	public String getPizza() {
+//		return "Hot Pizza";
+//	}
+//}
+
+
+
+@Component()
+public class PizzaController {
+
+	public String getPizza() {
+		return "Hot Pizza";
+	}
+}
+
+
+
+
+package in.javaguides;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+import in.javaguides.controller.PizzaController;
+
+//@SpringBootApplication
+//public class Application {
+//
+//	public static void main(String[] args) {
+//		var context = SpringApplication.run(Application.class, args);
+//		PizzaController bean = context.getBean(PizzaController.class);
+//		System.out.println(bean.getPizza());
+//	}
+//
+//}
+
+
+
+
+
+
+//@SpringBootApplication
+//public class Application {
+//
+//	public static void main(String[] args) {
+//		var context = SpringApplication.run(Application.class, args);
+//		PizzaController bean = (PizzaController) context.getBean("pizzaDemo");
+//		System.out.println(bean.getPizza());
+//	}
+//
+//}
+
+
+
+
+
+@SpringBootApplication
+public class Application {
+
+	public static void main(String[] args) {
+		var context = SpringApplication.run(Application.class, args);
+		PizzaController bean = (PizzaController) context.getBean("pizzaController");//class name with first letter small
+		System.out.println(bean.getPizza());
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+@Autowired
+----------
+The @Autowired annotation is used to inject the bean automatically
+
+The @Autowired annotation is used in constructor injection,setter injection and field injection
+
+
+
+
+
+package in.javaguides.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import in.javaguides.service.VegPizza;
+
+//@Component
+//public class PizzaController {
+//
+//	public String getPizza() {
+//		return "Hot Pizza";
+//	}
+//}
+
+
+
+//@Component("pizzaDemo")
+//public class PizzaController {
+//
+//	public String getPizza() {
+//		return "Hot Pizza";
+//	}
+//}
+
+
+
+//@Component()
+//public class PizzaController {
+//
+//	public String getPizza() {
+//		return "Hot Pizza";
+//	}
+//}
+
+
+
+@Component()
+public class PizzaController {
+	
+	@Autowired //field injection
+	private VegPizza vegPizza;
+	
+//	private VegPizza vegPizza;
+	
+//	@Autowired //constructor injection
+//	public PizzaController(VegPizza vegPizza) {
+//		this.vegPizza = vegPizza;
+//	}
+	
+//	@Autowired //setter injection
+//	public void setVegPizza(VegPizza vegPizza) {
+//		this.vegPizza = vegPizza;
+//	}
+	
+	
+	
+	public String getPizza() {
+		return vegPizza.getPizza();
+	}
+
+//	public String getPizza() {
+//		return "Hot Pizza";
+//	}
+}
+
+
+
+
+
+
+
+
+
+
+package in.javaguides;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+import in.javaguides.controller.PizzaController;
+
+//@SpringBootApplication
+//public class Application {
+//
+//	public static void main(String[] args) {
+//		var context = SpringApplication.run(Application.class, args);
+//		PizzaController bean = context.getBean(PizzaController.class);
+//		System.out.println(bean.getPizza());
+//	}
+//
+//}
+
+
+
+
+
+
+//@SpringBootApplication
+//public class Application {
+//
+//	public static void main(String[] args) {
+//		var context = SpringApplication.run(Application.class, args);
+//		PizzaController bean = (PizzaController) context.getBean("pizzaDemo");
+//		System.out.println(bean.getPizza());
+//	}
+//
+//}
+
+
+
+
+
+//@SpringBootApplication
+//public class Application {
+//
+//	public static void main(String[] args) {
+//		var context = SpringApplication.run(Application.class, args);
+//		PizzaController bean = (PizzaController) context.getBean("pizzaController");//class name with first letter small
+//		System.out.println(bean.getPizza());
+//	}
+//
+//}
+
+
+
+
+
+@SpringBootApplication
+public class Application {
+
+	public static void main(String[] args) {
+		var context = SpringApplication.run(Application.class, args);
+		PizzaController bean = (PizzaController) context.getBean("pizzaController");//class name with first letter small
+		System.out.println(bean.getPizza());
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+@Qualifier
+----------
+@Qualifier annotation is used in conjunction with Autowired to avoid confusion when we have two or more beans configured for 
+
+same type
+
+
+
+
+
+
+
+
+
+
+@Primary
+--------
+we use @Primary annotation to give higher preference to a bean when there are multiple beans of the same type
+
+
+
+
+
+
+
+@Bean
+------
+@Bean annotation indicates that a method produces a bean to be managed by the Spring container .the @Bean annotation is usually declared
+
+in Configuration class to create Spring Bean definitions
+
+
+
+
+
+Exception in thread "restartedMain" java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+
+
+By Default bean name is same as method name we can specify bean name using @Bean(name="beanName")
+
+
+
+
+@Bean annotation provides initMethod and destroyMethod attributes to perform certain actions after bean initialization or before bean 
+
+destruction by a container
+
+
+
+
+
+
+
+best use case insert records into database after shutdown we can destroy records
